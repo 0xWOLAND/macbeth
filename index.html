@@ -2,9 +2,12 @@
 <head>
   <style>
     html {
-      font-family: "Bai Jamjuree", sans-serif;
+      font-family: "Monotype Corsiva", "Apple Chancery", "ITC Zapf Chancery",
+        "URW Chancery L", cursive;
       overflow-x: hidden;
       overflow-y: scroll;
+      background-color: #e0d3af;
+      color: #5c4033;
     }
     .title_block {
       position: absolute;
@@ -16,7 +19,7 @@
     #title {
       font-family: "Monotype Corsiva", "Apple Chancery", "ITC Zapf Chancery",
         "URW Chancery L", cursive;
-      color: #8a0707;
+      color: #6b0505;
       font-size: 70px;
       margin: 0;
       padding: 5px;
@@ -25,9 +28,8 @@
     #byline {
       margin: 0;
       padding: 15px;
-      font-weight: 400;
-      color: #222;
-      font-size: x-large;
+      color: #5c4033;
+      font-size: 35px;
     }
 
     input:focus {
@@ -39,17 +41,17 @@
       top: 550px;
       width: 100%;
       display: flex;
-      flex-direction: row;
       margin: 0;
       justify-content: space-evenly;
     }
 
     .child {
       border: 3px solid;
-      border-color: #222;
+      border-color: #5c4033;
       width: 350px;
       height: 120px;
       font-size: 35px;
+      color: #5c4033;
       padding: 3px;
       font-family: inherit;
       font-weight: lighter;
@@ -61,6 +63,11 @@
       border-color: #8a0707;
       color: #8a0707;
     }
+
+    #reload {
+      margin-top: 550px;
+      font-size: 35px;
+    }
   </style>
 </head>
 <html>
@@ -68,6 +75,7 @@
     <div class="title_block">
       <h1 id="title">Recipes for Death in Macbeth</h1>
       <h3 id="byline">By: Bhargav Annem</h3>
+      <h1 id="reload">Reload the Page to Restart the Recipe!</h1>
     </div>
     <div id="container">
       <div id="main">
@@ -291,7 +299,9 @@
             }
             if (bool) {
               var temp = document.createElement("H1");
-              temp.innerText = "You have concocted the death for " + names[i];
+              temp.innerText =
+                "You have concocted the death for " + names[i] + ".";
+              temp.style.color = "#6b0505";
               main.appendChild(temp);
             }
             bool = true;
