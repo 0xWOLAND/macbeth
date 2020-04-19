@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<head>
+  <link rel="stylesheet" type="text/css" href="test.css" />
+  <script src="jquery-3.4.1.min.js"></script>
+</head>
+<html>
+  <body>
+    <div class="title_block">
+      <h1 id="title">Recipes for Death in Macbeth</h1>
+      <h3 id="byline">By: Bhargav Annem</h3>
+    </div>
+    <div id="container">
+      <div id="main">
+        <input
+          type="button"
+          value="Greed"
+          class="child"
+          onclick="first_round('greed')"
+          id="greed"
+        />
+        <input
+          type="button"
+          value="Righteousness"
+          class="child"
+          onclick="first_round('righteousness')"
+          id="righteousness"
+        />
+        <input
+          type="button"
+          value="Ambition"
+          class="child"
+          onclick="first_round('ambition')"
+          id="ambition"
+        />
+      </div>
+    </div>
+    <script src="test.js"></script>
+  </body>
+</html>
