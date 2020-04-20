@@ -68,6 +68,31 @@
       margin-top: 550px;
       font-size: 35px;
     }
+
+    #reason {
+      border-radius: 100%;
+      width: 105px;
+      position: absolute;
+      top: 350px;
+      left: 36%;
+      opacity: 0;
+    }
+
+    #reason:hover {
+      background-color: #b2a990;
+    }
+
+    #reasoning_text {
+      position: absolute;
+      top: 350px;
+    }
+
+    #text {
+      position: absolute;
+      top: 380px;
+      background-color: #efe8d5;
+      margin: 20px;
+    }
   </style>
 </head>
 <html>
@@ -90,46 +115,54 @@
           type="button"
           value="Righteousness"
           class="child"
-          onclick="first_round('righteousness')"
-          id="righteousness"
+          onclick="first_round('Righteousness')"
+          id="Righteousness"
         />
         <input
           type="button"
-          value="Ambition"
+          value="Part of Prophecy"
           class="child"
-          onclick="first_round('ambition')"
-          id="ambition"
+          onclick="first_round('Part of Prophecy')"
+          id="Part of Prophecy"
         />
       </div>
     </div>
+    <div id="reason">
+      <input
+        type="button"
+        value="Reasoning"
+        class="child"
+        onclick="displayReasoning()"
+        id="reasoning_text"
+      />
+    </div>
+    <div id="text"></div>
     <script>
       // --------------------------------------------------
       // Variables
       var greed = document.getElementById("greed");
-      var righteousness = document.getElementById("righteousness");
-      var ambition = document.getElementById("ambition");
-
+      var Righteousness = document.getElementById("Righteousness");
+      var PartofProphecy = document.getElementById("Part of Prophecy");
+      var selected_name = "";
       var arr = [];
       var main = document.getElementById("main");
       // ------------------------------------------------------------
       var macbeth = ["greed", "justice", "love"];
       var lady_macbeth = ["greed", "psychological issues", "love"];
-      var banquo = ["righteousness", "psychological issues"];
-      var duncan = ["righteousness", "betrayal"];
-      var ambition_banquo = [
-        "ambition",
-        "virtuous",
+      var duncan = ["Righteousness", "betrayal"];
+      var PartofProphecy_banquo = [
+        "Part of Prophecy",
+        "Ambition",
         "psychological issues",
         "assassinated",
       ];
-      var macduff = ["ambition", "vengeful", "related to macduff"];
+      var macduff = ["Part of Prophecy", "Relation with macduff"];
 
       var descriptions = [
         lady_macbeth,
         macbeth,
         duncan,
-        banquo,
-        ambition_banquo,
+        PartofProphecy_banquo,
         macduff,
       ];
       var names = [
@@ -137,21 +170,21 @@
         "Macbeth",
         "Duncan",
         "Banquo",
-        "Banquo ",
         "Macduff's Family",
       ];
+
       // ------------------------------------------------------------
       function first_round(param) {
         arr.push(param);
         document.getElementById("greed").remove();
-        document.getElementById("righteousness").remove();
-        document.getElementById("ambition").remove();
+        document.getElementById("Righteousness").remove();
+        document.getElementById("Part of Prophecy").remove();
         if (arr.includes("greed")) {
           greedSelected();
-        } else if (arr.includes("righteousness")) {
-          righteousnessSelected();
+        } else if (arr.includes("Righteousness")) {
+          RighteousnessSelected();
         } else {
-          ambitionSelected();
+          PartofProphecySelected();
         }
       }
 
@@ -202,7 +235,7 @@
         };
       }
 
-      function righteousnessSelected() {
+      function RighteousnessSelected() {
         var betrayal = document.createElement("INPUT");
         main.appendChild(betrayal);
         betrayal.type = "button";
@@ -212,56 +245,35 @@
         betrayal.onclick = function () {
           arr.push("betrayal");
           document.getElementById("betrayal").remove();
-          document.getElementById("psychological_issues").remove();
-          printDeath();
-        };
-        var psychological_issues = document.createElement("INPUT");
-        main.appendChild(psychological_issues);
-        psychological_issues.type = "button";
-        psychological_issues.value = "Psychological Issues";
-        psychological_issues.id = "psychological_issues";
-        psychological_issues.className = "child";
-        psychological_issues.onclick = function () {
-          arr.push("psychological issues");
-          document.getElementById("betrayal").remove();
-          document.getElementById("psychological_issues").remove();
           printDeath();
         };
       }
 
-      function ambitionSelected() {
+      function PartofProphecySelected() {
         var vengeful = document.createElement("INPUT");
         main.appendChild(vengeful);
         vengeful.type = "button";
-        vengeful.value = "Vengeful";
+        vengeful.value = "Relation with Macduff";
         vengeful.className = "child";
-        vengeful.id = "vengeful";
+        vengeful.id = "relation";
         vengeful.onclick = function () {
-          document.getElementById("vengeful").remove();
-          document.getElementById("virtuous").remove();
-          arr.push("vengeful");
-          var temp = document.createElement("INPUT");
-          temp.type = "button";
-          temp.value = "Related to Macduff";
-          temp.className = "child";
-          temp.id = "relation";
-          temp.onclick = function () {
-            arr.push("related to macduff");
-            document.getElementById("relation").remove();
-            printDeath();
-          };
-          main.appendChild(temp);
+          arr.push("Relation with macduff");
+          document.getElementById("relation").remove();
+          document.getElementById("Ambition").remove();
+          printDeath();
         };
-        var virtuous = document.createElement("INPUT");
-        main.appendChild(virtuous);
-        virtuous.type = "button";
-        virtuous.value = "Virtuous";
-        virtuous.id = "virtuous";
-        virtuous.className = "child";
-        virtuous.onclick = function () {
-          arr.push("virtuous");
-          document.getElementById("vengeful").remove();
-          document.getElementById("virtuous").remove();
+        main.appendChild(vengeful);
+
+        var ambition = document.createElement("INPUT");
+        main.appendChild(ambition);
+        ambition.type = "button";
+        ambition.value = "Ambition";
+        ambition.id = "Ambition";
+        ambition.className = "child";
+        ambition.onclick = function () {
+          arr.push("Ambition");
+          document.getElementById("Ambition").remove();
+          document.getElementById("relation").remove();
           var temp = document.createElement("INPUT");
           temp.type = "button";
           temp.value = "Psychological Issues";
@@ -285,7 +297,6 @@
           main.appendChild(temp);
         };
       }
-
       function printDeath() {
         console.log("arr: " + arr);
         var bool = true;
@@ -299,14 +310,46 @@
             }
             if (bool) {
               var temp = document.createElement("H1");
+              selected_name = names[i];
               temp.innerText =
                 "You have concocted the death for " + names[i] + ".";
               temp.style.color = "#6b0505";
               main.appendChild(temp);
+              document.getElementById("reason").style.opacity = 1;
             }
             bool = true;
           }
         }
+      }
+
+      function displayReasoning() {
+        document.getElementById("reasoning_text").disabled = true;
+        var temp = document.createElement("P");
+        if (selected_name == "Lady Macbeth") {
+          temp.innerText =
+            "Lady Macbeth Psychological Issues - “Out, damned spot; out, I say. One, two, -- why, then ‘tis time to do’t. Hell is murky. Fie, my lord, fie, a soldier and afeard? What need we fear who knows it, when none can call our power to account? – Yet who would have thought the old man to have had so much blood in him.” \n\n Lady Macbeth’s Greed - “Glamis thou art, and Cawdor; and shalt be What thou art promised. Yet do I fear thy nature; It is to full o’ th’ milk of human kindness To catch the nearest way: thou wouldst be great, Art not without ambition, but without The illness should attend it. What thou wouldst highly That wouldst thou holily; wouldst not play false, And yet wouldst wrongly win. Thou’ld’st have, great Glamis, That which cries “Thus thou must do,” if thou have it, And that which rather thou dost fear to do, Than wishes should be undone. Hie thee hither, That I may pour my spirits in thine ear And chastise with the valor of my tongue All that impedes thee from the golden round, Which fate and metaphysical aid doth seem To have thee crowned withal.” \n\n Macbeth and Lady Macbeth’s love for each other- “This have I thought good to deliver thee, my dearest partner of greatness, that thou might’st not lose the dues of rejoicing, by being ignorant of what greatness is promised thee. Lay it to thy heart, and farewell.”";
+        } else if (selected_name == "Macbeth") {
+          temp.innerText =
+            "Macbeth’s Greed - “If chance will have me king, why, chance may crown me Without my stir\"\n\n Macbeth and Lady Macbeth’s love for each other- “This have I thought good to deliver thee, my dearest partner of greatness, that thou might’st not lose the dues of rejoicing, by being ignorant of what greatness is promised thee. Lay it to thy heart, and farewell\"\n\n Macbeth dies because of justice - “Hail, king! for so thou art: behold, where stands The usurper's cursed head: the time is free: I see thee compass'd with thy kingdom's pearl, That speak my salutation in their minds; Whose voices I desire aloud with mine: Hail, King of Scotland!”";
+        } else if (selected_name == "Banquo") {
+          temp.innerText =
+            "Banquo’s ambition - \“Thou hast it now—king, Cawdor, Glamis, all,As the weird women promised, and I fearThou played'st most foully for't. Yet it was saidIt should not stand in thy posterity,But that myself should be the root and fatherOf many kings. If there come truth from them(As upon thee, Macbeth, their speeches shine)Why, by the verities on thee made good,May they not be my oracles as well, And set me up in hope? But hush, no more.“\nBanquo’s part in the prophecy -\n      \"First Witch:      Lesser than Macbeth, and greater.\n      Second Witch:      Not so happy, yet much happier.\n      Third Witch:      Thou shalt get kings, though thou be none:\n      So all hail, Macbeth and Banquo!\n      First Witch:      Banquo and Macbeth, all hail!\"\n  Reason for Banquo’s Assassination - “But to be safely thus.--Our fears in Banquo Stick deep; and in his royalty of nature Reigns that which would be fear'd: 'tis much he dares; And, to that dauntless temper of his mind, He hath a wisdom that doth guide his valour To act in safety.\" ";
+        } else if (selected_name == "Macduff's Family") {
+          temp.innerText =
+            'Macduff’s part in the prophecy - "Macbeth! Macbeth! Macbeth! Beware Macduff. Beware the thane of Fife. Dismiss me. Enough. Macbeth shall never vanquished be until Great Birnam Wood to high Dunsinane Hill Shall come against him."\n\nMacduff’s family’s death - \n"First Murderer	Where is your husband?\nLADY MACDUFF	I hope, in no place so unsanctified\nWhere such as thou mayst find him.\nFirst Murderer	He\'s a traitor.\nSon	Thou liest, thou shag-hair\'d villain!\nFirst Murderer	What, you egg!\n[Stabbing him]\nYoung fry of treachery!\nSon	He has kill\'d me, mother:\nRun away, I pray you!"';
+        } else if (selected_name == "Duncan") {
+          temp.innerText =
+            'Duncan is righteous because he puts his kingdom ahead of his own desires - "I have begun to plant thee, and will labour to make thee full of growing. Killing Duncan unleashed disorder across the kingdom" - Here’s a knocking indeed! If a man were porter of hell-gate, he should have old turning the key.';
+        } else {
+          temp.innerText =
+            "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati hic, dolor eos voluptatem earum quos iusto velit dolorem ut tenetur molestiae ab sit asperiores explicabo temporibus mollitia architecto sunt voluptas.";
+        }
+        temp.style.margin = "10px";
+        temp.style.position = "relative";
+        temp.style.top = "25%";
+        document.getElementById("text").appendChild(temp);
+        document.getElementById("main").remove();
+        document.getElementById("reasoning_text").remove();
       }
     </script>
   </body>
